@@ -1,1 +1,7 @@
 @import 'bootstrap';
+@import 'bootstrap-icons';
+
+
+img {
+  width: 50px;
+}
