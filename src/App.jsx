@@ -1,33 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react"
+
+const base_url = 'http://localhost:3000'
+const get_api_blog = '/api/v1/posts'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [posts, setPosts] = useState([])
+
+  useEffect(() => {
+
+    fetch(base_url + get_api_blog)
+      .then(response => response.json())
+      .then(data => setPosts(data))
+      .catch(err => console.error(err));
+
+  }, [])
+
+  console.log(posts);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">title</th>
+            <th scope="col">image</th>
+            <th scope="col">tags</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+        </tbody>
+      </table>
+
     </>
   )
 }
